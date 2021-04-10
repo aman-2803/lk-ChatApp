@@ -33,13 +33,11 @@ io.on('connection', socket => {
         formatMessage(lkbot ,`${user.username} joined the chat`)
         );                                                           ///to everyone except the connecting user in the room
 
-        // users list
+        // users list and room info
         io.to(user.room).emit('roomUsers' ,
         {
-
             room: user.room,
             users: getRoomUsers(user.room)
-
         });
     });
 
@@ -66,6 +64,13 @@ io.on('connection', socket => {
                 'message',
                 formatMessage(lkbot ,`${user.username} left the chat`)              //to everyone in room
                 );  
+             
+        // users list and room info
+        io.to(user.room).emit('roomUsers' ,
+        {
+            room: user.room,
+            users: getRoomUsers(user.room)
+        });   
                 
             
             
